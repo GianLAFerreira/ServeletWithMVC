@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.example.demo2.Empresa" %><%--
+<%@ page import="com.example.acao.Empresa" %><%--
   Created by IntelliJ IDEA.
   User: gian.ferreira
   Date: 23/05/2022

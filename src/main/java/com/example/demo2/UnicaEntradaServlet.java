@@ -13,24 +13,64 @@ public class UnicaEntradaServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String paramAcao = request.getParameter("acao");
 
-        if (paramAcao.equals("ListaEmpresa")){
-            ListaEmpresas acao = new ListaEmpresas();
-            acao.executa(request, response);
 
-        }else if (paramAcao.equals("RemoveEmpresa")){
-            RemoveEmpresa acao = new RemoveEmpresa();
-            acao.executa(request, response);
-        }else if (paramAcao.equals("MostraEmpresa")){
-            MostraEmpresa acao = new MostraEmpresa();
-            acao.executa(request, response);
-        }else if (paramAcao.equals("AlteraEmpresa")){
-            System.out.println("dorrr");
-            AlteraEmpresa acao = new AlteraEmpresa();
-            acao.executa(request, response);
-        }else if (paramAcao.equals("NovaEmpresa")){
-            System.out.println("dorrr");
-            NovaEmpresa acao = new NovaEmpresa();
-            acao.executa(request, response);
+        String nomeDaClasse = "com.example.acao." + paramAcao;
+
+        String nome;
+        try {
+            System.out.println("passou aqui");
+            Class classe = Class.forName(nomeDaClasse);//carrega a classe com o nome
+            Acao acao = (Acao) classe.newInstance();
+            nome = acao.executa(request, response);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            throw new ServletException(e);
         }
+
+        String[] tipoEEndereco =  nome.split(":");
+        if (tipoEEndereco[0].equals("forward")){
+            RequestDispatcher rd= request.getRequestDispatcher("WEB-INF/view/" + tipoEEndereco[1]);
+            rd.forward(request, response);
+        }else{
+            response.sendRedirect(tipoEEndereco[1]);
+        }
+//
+//        String nome = null;
+//
+//        switch (paramAcao) {
+//            case "ListaEmpresa": {
+//                ListaEmpresa acao = new ListaEmpresa();
+//                nome = acao.executa(request, response);
+//                break;
+//            }
+//            case "RemoveEmpresa": {
+//                RemoveEmpresa acao = new RemoveEmpresa();
+//                nome = acao.executa(request, response);
+//                break;
+//            }
+//            case "MostraEmpresa": {
+//                MostraEmpresa acao = new MostraEmpresa();
+//                nome = acao.executa(request, response);
+//                break;
+//            }
+//            case "AlteraEmpresa": {
+//                System.out.println("Chamando altera empresa");
+//                AlteraEmpresa acao = new AlteraEmpresa();
+//                nome = acao.executa(request, response);
+//                break;
+//            }
+//            case "NovaEmpresa": {
+//                System.out.println("Chamou o nova empresa");
+//                NovaEmpresa acao = new NovaEmpresa();
+//                nome = acao.executa(request, response);
+//                break;
+//            }
+//            case "NovaEmpresaForm": {
+//                System.out.println("Abrindo formulário de cadastro de nova empresa");
+//                NovaEmpresaForm acao = new NovaEmpresaForm();
+//                nome = acao.executa(request, response);
+//                break;
+//            }
+//        }
+
     }
 }

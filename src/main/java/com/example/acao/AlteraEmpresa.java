@@ -11,9 +11,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class AlteraEmpresa {
-    public void executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("Ai sim, sexooo");
+public class AlteraEmpresa implements Acao{
+    public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("Altera Epresa");
         String nomeEmpresa   =  request.getParameter("nome");
         String parameterData =  request.getParameter("data");
         String paramID       =  request.getParameter("id");
@@ -33,6 +33,6 @@ public class AlteraEmpresa {
         empresa.setNome(nomeEmpresa);
         empresa.setDataAbertura(dataAbertura);
 
-        response.sendRedirect("entrada?acao=ListaEmpresa");
+        return "redirect:entrada?acao=ListaEmpresa";
     }
 }
