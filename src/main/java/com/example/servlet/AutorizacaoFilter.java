@@ -9,6 +9,11 @@ import java.io.IOException;
 //@WebFilter(filterName = "/entrada")
 public class AutorizacaoFilter implements Filter {
     @Override
+    public void init(FilterConfig filterConfig) throws ServletException {}
+
+    @Override
+    public void destroy() {}
+    @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain) throws ServletException, IOException {
 
         System.out.println("AutorizacaoFilter");
