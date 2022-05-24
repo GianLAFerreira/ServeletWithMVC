@@ -1,6 +1,6 @@
 package com.example.acao;
 
-import com.example.demo2.Banco;
+import com.example.modelo.Banco;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

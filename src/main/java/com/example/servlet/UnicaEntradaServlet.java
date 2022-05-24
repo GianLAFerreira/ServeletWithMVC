@@ -1,4 +1,4 @@
-package com.example.demo2;
+package com.example.servlet;
 
 import com.example.acao.*;
 
@@ -11,8 +11,17 @@ import java.io.IOException;
 public class UnicaEntradaServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String paramAcao = request.getParameter("acao");
 
+        HttpSession sessao = request.getSession();
+        boolean usuarioNaoEstaLogado = (sessao.getAttribute("usuarioLogado") == null);
+        boolean ehUmaAcaoProtegida = !(paramAcao.equals("Login") || paramAcao.equals("LoginForm")) ;
+
+        if (ehUmaAcaoProtegida && usuarioNaoEstaLogado){
+            response.sendRedirect("entrada?acao=LoginForm");
+            return;
+        }
 
         String nomeDaClasse = "com.example.acao." + paramAcao;
 

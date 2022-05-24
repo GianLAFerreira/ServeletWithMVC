@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.example.demo2.Empresa" %><%--
+<%@ page import="com.example.modelo.Empresa" %><%--
   Created by IntelliJ IDEA.
   User: gian.ferreira
   Date: 23/05/2022
@@ -16,6 +16,10 @@
     <title>Lista Empresas now</title>
 </head>
 <body>
+    <c:import url="logout-parcial.jsp" />
+        Usuario logado: ${usuarioLogado.login}
+    <br>
+    <br>
 <h1>lista novinha</h1>
 <c:if test="${not empty empresa}">
     Empresa ${empresa} cadastrada

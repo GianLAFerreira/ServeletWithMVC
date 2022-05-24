@@ -1,7 +1,7 @@
 package com.example.acao;
 
-import com.example.demo2.Banco;
-import com.example.demo2.Empresa;
+import com.example.modelo.Banco;
+import com.example.modelo.Empresa;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
