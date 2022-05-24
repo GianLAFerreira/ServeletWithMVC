@@ -7,41 +7,33 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "entrada", value = "/entrada")
+//@WebServlet(name = "entrada", value = "/entrada")
 public class UnicaEntradaServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String paramAcao = request.getParameter("acao");
+  //      String paramAcao = request.getParameter("acao");
 
-        HttpSession sessao = request.getSession();
-        boolean usuarioNaoEstaLogado = (sessao.getAttribute("usuarioLogado") == null);
-        boolean ehUmaAcaoProtegida = !(paramAcao.equals("Login") || paramAcao.equals("LoginForm")) ;
+//        HttpSession sessao = request.getSession();
+//        boolean usuarioNaoEstaLogado = (sessao.getAttribute("usuarioLogado") == null);
+//        boolean ehUmaAcaoProtegida = !(paramAcao.equals("Login") || paramAcao.equals("LoginForm")) ;
+//
+//        if (ehUmaAcaoProtegida && usuarioNaoEstaLogado){
+//            response.sendRedirect("entrada?acao=LoginForm");
+//            return;
+//        }
 
-        if (ehUmaAcaoProtegida && usuarioNaoEstaLogado){
-            response.sendRedirect("entrada?acao=LoginForm");
-            return;
-        }
 
-        String nomeDaClasse = "com.example.acao." + paramAcao;
 
-        String nome;
-        try {
-            System.out.println("passou aqui");
-            Class classe = Class.forName(nomeDaClasse);//carrega a classe com o nome
-            Acao acao = (Acao) classe.newInstance();
-            nome = acao.executa(request, response);
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-            throw new ServletException(e);
-        }
 
-        String[] tipoEEndereco =  nome.split(":");
-        if (tipoEEndereco[0].equals("forward")){
-            RequestDispatcher rd= request.getRequestDispatcher("WEB-INF/view/" + tipoEEndereco[1]);
-            rd.forward(request, response);
-        }else{
-            response.sendRedirect(tipoEEndereco[1]);
-        }
+
+
+
+
+
+
+
+
 //
 //        String nome = null;
 //
